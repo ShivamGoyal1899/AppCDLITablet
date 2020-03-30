@@ -14,8 +14,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:image_downloader/image_downloader.dart';
+import 'package:intl/intl.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HorizontalCarousel extends StatefulWidget {
   HorizontalCarousel({Key key, this.title}) : super(key: key);
@@ -91,7 +93,9 @@ class _HorizontalCarouselState extends State<HorizontalCarousel> {
       var request = await HttpClient().getUrl(Uri.parse(_currentUri));
       var response = await request.close();
       Uint8List bytes = await consolidateHttpClientResponseBytes(response);
-      await Share.file('CDLI Tablet', 'cdli.jpg', bytes, 'image/jpg');
+      await Share.file('CDLI Tablet', 'cdli.jpg', bytes, 'image/jpg',
+          text:
+              '﻿I saw this entry on the CDLI tablet app and wanted to share it with you:\n\n\"Debt-note and its sealed envelope dating to the Old Assyrian period; National Museums Scotland, Edinburgh; NMS A.1909.586.\"\n\nVisit this page on the web: https://cdli.ucla.edu/cdlitablet/showcase?date=2020-03-30\n\nInformation about the iPad and Android apps:\nhttps://cdli.ucla.edu/?q=cdli-tablet');
     } catch (e) {
       print('_shareImageFromUrl error: $e');
     }
@@ -179,9 +183,44 @@ class _HorizontalCarouselState extends State<HorizontalCarousel> {
                             child: SingleChildScrollView(
                               child: Container(
                                 padding: EdgeInsets.all(8.0),
-                                child: Html(
-                                  data: snapshot.data[_current].fullInfo,
-                                  defaultTextStyle: TextStyle(fontSize: 10.0),
+                                child: Column(
+                                  children: <Widget>[
+                                    Html(
+                                      data: snapshot.data[_current].blurb,
+                                      defaultTextStyle:
+                                          TextStyle(fontSize: 10.0),
+                                    ),
+                                    Divider(
+                                      height: 15.0,
+                                      thickness: 1.0,
+                                      color: Colors.black,
+                                    ),
+                                    Html(
+                                      data: snapshot.data[_current].fullInfo,
+                                      defaultTextStyle:
+                                          TextStyle(fontSize: 10.0),
+                                      renderNewlines: false,
+                                      onLinkTap: (url) async {
+                                        if (await canLaunch(url)) {
+                                          await launch(url);
+                                        } else {
+                                          throw 'Could not launch $url';
+                                        }
+                                      },
+                                    ),
+                                    Divider(
+                                      height: 15.0,
+                                      thickness: 1.0,
+                                      color: Colors.black,
+                                    ),
+                                    Html(
+                                      data: 'Published on: ' +
+                                          DateFormat("d MMMM y").format(
+                                              snapshot.data[_current].date),
+                                      defaultTextStyle:
+                                          TextStyle(fontSize: 10.0),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
@@ -216,6 +255,7 @@ class _HorizontalCarouselState extends State<HorizontalCarousel> {
                     onPageChanged: (index) {
                       setState(() {
                         _current = index;
+                        // TODO: Change thumbnailUrl -> url
                         _currentUri = snapshot.data[index].thumbnailUrl;
                       });
                     },
