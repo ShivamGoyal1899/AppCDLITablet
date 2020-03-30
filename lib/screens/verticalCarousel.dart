@@ -1,5 +1,6 @@
 import 'package:cdlitablet/model/cdliModel.dart';
 import 'package:cdlitablet/screens/horizontalCarousel.dart';
+import 'package:cdlitablet/screens/searchCDLI.dart';
 import 'package:cdlitablet/services/dataServices.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +33,31 @@ class _VerticalCarouselState extends State<VerticalCarousel> {
         backgroundColor: Colors.transparent,
         actions: <Widget>[
           IconButton(
+            icon: Icon(Icons.lightbulb_outline, color: Colors.white),
+            onPressed: () {},
+            tooltip: 'Switch Theme',
+          ),
+          IconButton(
+            icon: Icon(Icons.search, color: Colors.white),
+            onPressed: () {
+              Navigator.of(context)
+                  .push(CupertinoPageRoute(builder: (BuildContext context) {
+                return SearchCDLI(title: 'CDLI tablet Search');
+              }));
+            },
+            tooltip: 'Search',
+          ),
+          IconButton(
+            icon: Icon(Icons.filter_list, color: Colors.white),
+            onPressed: () {},
+            tooltip: 'Filter',
+          ),
+          IconButton(
+            icon: Icon(Icons.sort_by_alpha, color: Colors.white),
+            onPressed: () {},
+            tooltip: 'Sort',
+          ),
+          IconButton(
             icon: Icon(Icons.view_carousel, color: Colors.white),
             onPressed: () {
               Navigator.of(context).pushReplacement(
@@ -39,6 +65,7 @@ class _VerticalCarouselState extends State<VerticalCarousel> {
                 return HorizontalCarousel(title: 'CDLI tablet', index: 0);
               }));
             },
+            tooltip: 'Carousel View',
           ),
         ],
       ),

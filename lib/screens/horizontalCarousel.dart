@@ -4,6 +4,7 @@ import 'dart:typed_data';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cdlitablet/model/cdliModel.dart';
+import 'package:cdlitablet/screens/searchCDLI.dart';
 import 'package:cdlitablet/screens/verticalCarousel.dart';
 import 'package:cdlitablet/services/dataServices.dart';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
@@ -20,7 +21,8 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HorizontalCarousel extends StatefulWidget {
-  HorizontalCarousel({Key key, @required this.title, @required this.index}) : super(key: key);
+  HorizontalCarousel({Key key, @required this.title, @required this.index})
+      : super(key: key);
   final String title;
   final int index;
 
@@ -112,12 +114,29 @@ class _HorizontalCarouselState extends State<HorizontalCarousel> {
         backgroundColor: Colors.transparent,
         actions: <Widget>[
           IconButton(
+            icon: Icon(Icons.lightbulb_outline, color: Colors.white),
+            onPressed: () {},
+            tooltip: 'Switch Theme',
+          ),
+          IconButton(
+            icon: Icon(Icons.search, color: Colors.white),
+            onPressed: () {
+              Navigator.of(context)
+                  .push(CupertinoPageRoute(builder: (BuildContext context) {
+                return SearchCDLI(title: 'CDLI tablet Search');
+              }));
+            },
+            tooltip: 'Search',
+          ),
+          IconButton(
             icon: Icon(Icons.file_download, color: Colors.white),
             onPressed: () async => await _downloadImageFromUrl(),
+            tooltip: 'Download',
           ),
           IconButton(
             icon: Icon(Icons.share, color: Colors.white),
             onPressed: () async => await _shareImageFromUrl(),
+            tooltip: 'Share',
           ),
           IconButton(
             icon: Icon(Icons.apps, color: Colors.white),
@@ -127,6 +146,7 @@ class _HorizontalCarouselState extends State<HorizontalCarousel> {
                 return VerticalCarousel(title: 'CDLI tablet');
               }));
             },
+            tooltip: 'List View',
           ),
         ],
       ),
