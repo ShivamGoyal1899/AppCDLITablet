@@ -32,6 +32,8 @@ dependencies:
   flutter_html: ^0.11.1
   intl: ^0.16.1
   esys_flutter_share: ^1.0.2
+  image_downloader: ^0.19.2
+  flushbar: 1.6.0
 
 dev_dependencies:
   flutter_test:

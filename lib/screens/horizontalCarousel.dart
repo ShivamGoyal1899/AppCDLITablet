@@ -7,10 +7,13 @@ import 'package:cdlitablet/model/cdliModel.dart';
 import 'package:cdlitablet/screens/verticalCarousel.dart';
 import 'package:cdlitablet/services/dataServices.dart';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:image_downloader/image_downloader.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
@@ -36,6 +39,53 @@ class _HorizontalCarouselState extends State<HorizontalCarousel> {
     super.initState();
   }
 
+  Future<void> _downloadImageFromUrl() async {
+    Flushbar(
+      title: "CDLI Tablet",
+      message: "Downloading Artifact Image...",
+      duration: Duration(seconds: 3),
+      flushbarStyle: FlushbarStyle.FLOATING,
+      aroundPadding: EdgeInsets.all(8),
+      borderRadius: 8,
+      flushbarPosition: FlushbarPosition.BOTTOM,
+      showProgressIndicator: false,
+    )..show(context);
+
+    try {
+      // Saved with this method.
+      var imageId = await ImageDownloader.downloadImage(_currentUri,
+          destination: AndroidDestinationType.custom(directory: 'CDLITablet'));
+      if (imageId == null) {
+        return;
+      }
+
+      // Below is a method of obtaining saved image information.
+      var path = await ImageDownloader.findPath(imageId);
+
+      Flushbar(
+        title: "CDLI Tablet",
+        message: "Artifact Image is saved to Gallery!",
+        duration: Duration(seconds: 3),
+        flushbarStyle: FlushbarStyle.FLOATING,
+        aroundPadding: EdgeInsets.all(8),
+        borderRadius: 8,
+        flushbarPosition: FlushbarPosition.BOTTOM,
+        showProgressIndicator: false,
+        mainButton: FlatButton(
+          onPressed: () async {
+            await ImageDownloader.open(path);
+          },
+          child: Text(
+            "VIEW",
+            style: TextStyle(color: Colors.amber),
+          ),
+        ),
+      )..show(context);
+    } on PlatformException catch (e) {
+      print('_downloadImageFromUrl error: $e');
+    }
+  }
+
   Future<void> _shareImageFromUrl() async {
     try {
       var request = await HttpClient().getUrl(Uri.parse(_currentUri));
@@ -43,7 +93,7 @@ class _HorizontalCarouselState extends State<HorizontalCarousel> {
       Uint8List bytes = await consolidateHttpClientResponseBytes(response);
       await Share.file('CDLI Tablet', 'cdli.jpg', bytes, 'image/jpg');
     } catch (e) {
-      print('error: $e');
+      print('_shareImageFromUrl error: $e');
     }
   }
 
@@ -56,6 +106,10 @@ class _HorizontalCarouselState extends State<HorizontalCarousel> {
         title: Text(widget.title),
         backgroundColor: Colors.transparent,
         actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.file_download, color: Colors.white),
+            onPressed: () async => await _downloadImageFromUrl(),
+          ),
           IconButton(
             icon: Icon(Icons.share, color: Colors.white),
             onPressed: () async => await _shareImageFromUrl(),
@@ -167,6 +221,7 @@ class _HorizontalCarouselState extends State<HorizontalCarousel> {
                     },
                     itemCount: snapshot.data.length,
                     itemBuilder: (BuildContext context, int index) => PhotoView(
+                      // TODO: Change thumbnailUrl -> url
                       imageProvider:
                           NetworkImage(snapshot.data[index].thumbnailUrl),
                       backgroundDecoration: BoxDecoration(color: Colors.black),
