@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class VerticalCarousel extends StatefulWidget {
-  VerticalCarousel({Key key, this.title}) : super(key: key);
+  VerticalCarousel({Key key, @required this.title}) : super(key: key);
   final String title;
 
   @override
@@ -36,7 +36,7 @@ class _VerticalCarouselState extends State<VerticalCarousel> {
             onPressed: () {
               Navigator.of(context).pushReplacement(
                   CupertinoPageRoute(builder: (BuildContext context) {
-                return HorizontalCarousel(title: 'CDLI tablet');
+                return HorizontalCarousel(title: 'CDLI tablet', index: 0);
               }));
             },
           ),
@@ -55,12 +55,23 @@ class _VerticalCarouselState extends State<VerticalCarousel> {
                     children: <Widget>[
                       Container(
                         padding: EdgeInsets.symmetric(
-                            horizontal: 10.0, vertical: 2.0),
-                        child: Image.network(snapshot.data[index].thumbnailUrl),
+                            horizontal: 5.0, vertical: 0.0),
+                        child: GestureDetector(
+                          child:
+                              Image.network(snapshot.data[index].thumbnailUrl),
+                          onTap: () {
+                            Navigator.of(context).pushReplacement(
+                                CupertinoPageRoute(
+                                    builder: (BuildContext context) {
+                              return HorizontalCarousel(
+                                  title: 'CDLI tablet', index: index);
+                            }));
+                          },
+                        ),
                       ),
                       Positioned(
-                        top: 5.0,
-                        right: 5.0,
+                        top: 0.0,
+                        right: 10.0,
                         child: Container(
                           padding: EdgeInsets.all(18.0),
                           decoration: BoxDecoration(
@@ -68,7 +79,7 @@ class _VerticalCarouselState extends State<VerticalCarousel> {
                               shape: BoxShape.circle,
                               boxShadow: [
                                 BoxShadow(
-                                  blurRadius: 20.0,
+                                  blurRadius: 10.0,
                                   color: Colors.grey,
                                 ),
                               ]),
@@ -82,7 +93,7 @@ class _VerticalCarouselState extends State<VerticalCarousel> {
                                     fontWeight: FontWeight.w700),
                               ),
                               Text(
-                                DateFormat("MMMM")
+                                DateFormat("MMM")
                                     .format(snapshot.data[index].date),
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 10.0),

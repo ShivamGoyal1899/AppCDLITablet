@@ -20,8 +20,9 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HorizontalCarousel extends StatefulWidget {
-  HorizontalCarousel({Key key, this.title}) : super(key: key);
+  HorizontalCarousel({Key key, @required this.title, @required this.index}) : super(key: key);
   final String title;
+  final int index;
 
   @override
   _HorizontalCarouselState createState() => _HorizontalCarouselState();
@@ -35,7 +36,7 @@ class _HorizontalCarouselState extends State<HorizontalCarousel> {
   @override
   void initState() {
     dataState.getCDLI();
-    _current = 0;
+    _current = widget.index;
     _currentUri =
         'https://cdli.ucla.edu/dl/daily_tablets/RSM7-521c91d137921_thumbnail.jpg';
     super.initState();
@@ -251,7 +252,7 @@ class _HorizontalCarouselState extends State<HorizontalCarousel> {
                     height: MediaQuery.of(context).size.height,
                     viewportFraction: 1.0,
                     enableInfiniteScroll: false,
-                    initialPage: 0,
+                    initialPage: widget.index,
                     onPageChanged: (index) {
                       setState(() {
                         _current = index;

@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         ),
         fontFamily: "GoogleSans",
       ),
-      home: HorizontalCarousel(title: 'CDLI tablet'),
+      home: HorizontalCarousel(title: 'CDLI tablet', index: 0),
     );
   }
 }
