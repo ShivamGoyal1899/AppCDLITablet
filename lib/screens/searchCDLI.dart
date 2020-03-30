@@ -1,4 +1,5 @@
-import 'package:cdlitablet/screens/search_bar.dart';
+import 'package:flappy_search_bar/flappy_search_bar.dart';
+import 'package:flappy_search_bar/search_bar_style.dart';
 import 'package:flutter/material.dart';
 
 class SearchCDLI extends StatefulWidget {
@@ -68,6 +69,10 @@ class _SearchCDLIState extends State<SearchCDLI> {
                 ),
               );
             },
+            cancellationWidget: Text(
+              'Cancel',
+              style: TextStyle(color: Colors.white),
+            ),
             searchBarStyle: SearchBarStyle(
               backgroundColor: Colors.white,
               padding: EdgeInsets.all(5),
