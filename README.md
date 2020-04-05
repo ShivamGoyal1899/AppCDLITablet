@@ -18,17 +18,21 @@
   </a>
 </p>
 <p align="center">
-  CDLI Tablet App combines text and images of cuneiform inscriptions, of related archaeological artifacts, and of the equipment and techniques employed by specialists to capture, digitally preserve and disseminate the cultural heritage of the ancient Near East.
+  CDLI Tablet App combines text and images of cuneiform inscriptions, of related archaeological artifacts, and of the equipment and techniques employed by specialists to capture, digitally preserve and disseminate the cultural heritage of the ancient East.
 </p>
 <p align="center">
 Show some love 💜 and Star ⭐️ the Repository to support the project.
 </p>
 
-|               Horizontal Carousel                 |                    Pinch Zoom                     |                 Sliding Up Panel                  |
-|:-------------------------------------------------:|:-------------------------------------------------:|:-------------------------------------------------:|
-| <img width="1604" src="./readme/screenshot1.jpg"> | <img width="1604" src="./readme/screenshot2.jpg"> | <img width="1604" src="./readme/screenshot3.jpg"> |
-| <img width="1604" src="./readme/screenshot4.jpg"> | <img width="1604" src="./readme/screenshot5.jpg"> | <img width="1604" src="./readme/screenshot6.jpg"> |
-|             **Vertical Carousel**                 |                  **Share Artifact**               |              **Share via WhatsApp**               |
+|               Carousel View                        |                    Pinch + Zoom + Pan              |               Artifact Description                 |
+|:--------------------------------------------------:|:--------------------------------------------------:|:--------------------------------------------------:|
+| <img width="1604" src="./readme/screenshot1.jpg">  | <img width="1604" src="./readme/screenshot2.jpg">  | <img width="1604" src="./readme/screenshot3.jpg">  |
+|               **Grid View**                        |                  **Share Artifact**                |               **Share via Email**                  |
+| <img width="1604" src="./readme/screenshot4.jpg">  | <img width="1604" src="./readme/screenshot5.jpg">  | <img width="1604" src="./readme/screenshot6.jpg">  |
+|             **Artifact Search**                    |                  **Search Results**                |               **Share via WhatsApp**               |
+| <img width="1604" src="./readme/screenshot7.jpg">  | <img width="1604" src="./readme/screenshot8.jpg">  | <img width="1604" src="./readme/screenshot9.jpg">  |
+|             **Download Artifact**                  |                **Successful Download**             |               **Preview Download**                 |
+| <img width="1604" src="./readme/screenshot10.jpg"> | <img width="1604" src="./readme/screenshot11.jpg"> | <img width="1604" src="./readme/screenshot12.jpg"> |
 
 ## :bookmark_tabs: What’s In This Document
 
@@ -64,16 +68,14 @@ You can get the CDLI Tablet App up and running on your local dev environment in 
 At this point, you’ve got the fully functional CDLI Tablet App running. For additional information on how you can customize your Flutter Apps, see [Google Codelabs](https://codelabs.developers.google.com/codelabs/flutter/) and [HackerNoon Guide](https://hackernoon.com/making-the-most-of-flutter-from-basics-to-customization-433171581d01).
 
 ## :ballot_box: Flutter / Dart Packages Used
-|    Package Name    	| Package Version 	|                           Package URL                          	|
-|:------------------:	|:---------------:	|:--------------------------------------------------------------:	|
-|    cupertino_icons  	|      0.1.2     	| [Open on pub.dev](https://pub.dev/packages/cupertino_icons)    	|
-|    carousel_slider  	|      1.4.1     	| [Open on pub.dev](https://pub.dev/packages/carousel_slider)    	|
-|    sliding_up_panel   |      1.0.0     	| [Open on pub.dev](https://pub.dev/packages/sliding_up_panel)    	|
-|       photo_view   	|      0.9.2     	| [Open on pub.dev](https://pub.dev/packages/photo_view)    	    |
-|        http       	|      0.12.0+4    	| [Open on pub.dev](https://pub.dev/packages/http) 	                |
-|    flutter_html    	|      0.11.1     	| [Open on pub.dev](https://pub.dev/packages/flutter_html)      	|
-|       intl        	|      0.16.1     	| [Open on pub.dev](https://pub.dev/packages/intl)              	|
-|  esys_flutter_share  	|      1.0.2     	| [Open on pub.dev](https://pub.dev/packages/esys_flutter_share)    |
+|    Package Name  	| Package Version 	|                           Package URL                          	|    Package Name      	| Package Version 	|                           Package URL                          	|
+|:----------------:	|:-------: |:-----------------------------------------------------------: |:-----------------: |:-----:	|:--------------------------------------------------------------:	|
+| cupertino_icons  	| 0.1.2    | [Open on pub.dev](https://pub.dev/packages/cupertino_icons)  | intl               | 0.16.1 | [Open on pub.dev](https://pub.dev/packages/intl)              	|
+| carousel_slider  	| 1.4.1    | [Open on pub.dev](https://pub.dev/packages/carousel_slider)  | esys_flutter_share | 1.0.2  | [Open on pub.dev](https://pub.dev/packages/esys_flutter_share)  |
+| sliding_up_panel  | 1.0.0    | [Open on pub.dev](https://pub.dev/packages/sliding_up_panel) | image_downloader   | 0.19.2 | [Open on pub.dev](https://pub.dev/packages/image_downloader)    |
+| photo_view       	| 0.9.2    | [Open on pub.dev](https://pub.dev/packages/photo_view)       | flushbar           | 1.6.0  | [Open on pub.dev](https://pub.dev/packages/flushbar)            |
+| http             	| 0.12.0+4 | [Open on pub.dev](https://pub.dev/packages/http)             | url_launcher       | 5.4.2  | [Open on pub.dev](https://pub.dev/packages/url_launcher)        |
+| flutter_html     	| 0.11.1   | [Open on pub.dev](https://pub.dev/packages/flutter_html)     | flappy_search_bar  | 1.7.2  | [Open on pub.dev](https://pub.dev/packages/flappy_search_bar)   |
 
 ## :label: Versioning
 I've used [Semantic Versioning 2.0.0](https://semver.org/) for versioning throughout the project.
