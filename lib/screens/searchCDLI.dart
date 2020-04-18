@@ -1,3 +1,4 @@
+import 'package:cdlitablet/screens/verticalCarousel.dart';
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flappy_search_bar/search_bar_style.dart';
 import 'package:flutter/material.dart';
@@ -38,10 +39,51 @@ class _SearchCDLIState extends State<SearchCDLI> {
         title: Text(widget.title),
         backgroundColor: Colors.transparent,
         actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.lightbulb_outline, color: Colors.white),
-            onPressed: () {},
+          PopupMenuButton<Themes>(
+            captureInheritedThemes: true,
+            padding: EdgeInsets.all(0),
+            color: Colors.white,
+            offset: Offset.fromDirection(2.2, 100),
+            icon: Icon(Icons.lightbulb_outline),
             tooltip: 'Switch Theme',
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20.0))),
+            itemBuilder: (_) => <PopupMenuEntry<Themes>>[
+              PopupMenuItem<Themes>(
+                enabled: false,
+                child: Center(
+                  child: Text(
+                    'Themes',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w700, color: Colors.black),
+                  ),
+                ),
+              ),
+              PopupMenuDivider(height: 0.0),
+              PopupMenuItem<Themes>(
+                value: Themes.Dark,
+                child: ListTile(
+                  leading: Icon(Icons.wb_sunny),
+                  title: Text('Light'),
+                ),
+              ),
+              PopupMenuDivider(height: 0.0),
+              PopupMenuItem<Themes>(
+                value: Themes.Light,
+                child: ListTile(
+                  leading: Icon(Icons.brightness_3),
+                  title: Text('Dark'),
+                ),
+              ),
+              PopupMenuDivider(height: 0.0),
+              PopupMenuItem<Themes>(
+                value: Themes.System,
+                child: ListTile(
+                  leading: Icon(Icons.settings),
+                  title: Text('System'),
+                ),
+              ),
+            ],
           ),
         ],
       ),
