@@ -10,7 +10,6 @@ class MyApp extends StatelessWidget {
       title: 'CDLI Tablet',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
         appBarTheme: AppBarTheme(
           elevation: 0.0,
         ),
