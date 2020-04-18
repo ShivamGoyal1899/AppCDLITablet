@@ -1,4 +1,4 @@
-import 'package:cdlitablet/screens/horizontalCarousel.dart';
+import 'package:cdlitablet/screens/splashScreen.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         ),
         fontFamily: "GoogleSans",
       ),
-      home: HorizontalCarousel(title: 'CDLI tablet', index: 0),
+      home: SplashScreen(),
     );
   }
 }
